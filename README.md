@@ -1,4 +1,4 @@
 # dix
 R-function:
 
-dix_print
+dix_print - 
