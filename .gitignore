@@ -3,3 +3,4 @@ dix.Rproj
 .Rbuildignore
 .RData
 .Rhistory
+.DS_Store
