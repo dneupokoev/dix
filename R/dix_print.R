@@ -1,14 +1,23 @@
+#'dix
+#'
 #' @title dix_print
 #'
-#' @description функция формирования текста из переданных параметров и вывод в консоль для логирования
+#' @description text generation function from transmitted parameters
 #'
-#' @param параметры (на вход можно подавать функцию)
+#' @return string
 #'
-#' @return строка: текущая дата и переданные параметры
-#'
-#' @examples
+#' @examples dix_print
 #'
 #' @export
+#'
+#'
+#
+# Some useful keyboard shortcuts for package authoring:
+#
+#   Build and Reload Package:  'Ctrl + Shift + B'
+#   Check Package:             'Ctrl + Shift + E'
+#   Test Package:              'Ctrl + Shift + T'
+
 dix_print <- function(print_in01=NA, print_in02=NA, print_in03=NA){
   txt_f_print <- paste( as.character(Sys.time()), "|", as.character(print_in01) )
 
