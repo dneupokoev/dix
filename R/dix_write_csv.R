@@ -18,7 +18,7 @@
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
-dix_write_csv_test <- function(param_in01=NA, param_in02=NA, param_in03=NA){
+dix_write_csv <- function(param_in01=NA, param_in02=NA, param_in03=NA){
   if ( (!is.na(param_in01)) & (!is.na(param_in02)) ) {
     for (i in 1:length(param_in01)) {
       param_in01[[i]] <- iconv(param_in01[[i]], from = "utf-8", to = "windows-1251")
