@@ -12,6 +12,7 @@
 <br><b>Затем вызывать в теле скрипта</b>
 <br>
 <br>dix_print - 
+<br>dix_log - 
 <br>dix_write_csv - 
 <br>
 </p>
