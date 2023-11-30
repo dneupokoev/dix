@@ -20,7 +20,7 @@
 
 dix_log <- function(print_in01=NA, print_in02=NA, print_in03=NA){
   txt_f_print <- paste0(as.character(Sys.time()), ' | ', as.character(print_in01))
-  txt_f_memory <- paste0(' (', round(memory.size(), 0), 'MB)')
+  txt_f_memory <- paste0(' (', round(memory.size(), 0), ' MB)')
   # 
   if (!is.na(print_in02)) {
     if (as.character(print_in02) %in% c('begin', 'end')) {
