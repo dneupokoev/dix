@@ -14,5 +14,5 @@
 <br>dix_print - 
 <br>dix_log - 
 <br>dix_write_csv - 
-<br>
+<br>dix_eval_timeout - 
 </p>
