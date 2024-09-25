@@ -18,7 +18,7 @@
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
-dix_eval_timeout <- function(time_limit_sec = 10, count_attemps = 5, eval_exec = 'EMPTY') {
+dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec = 'EMPTY') {
   # time_limit_sec - количество секунд ждать выполнения, после этого отрубать
   # count_attemps - количество попыток
   # eval_exec - конструкция, которую нужно выполнить
@@ -44,8 +44,8 @@ dix_eval_timeout <- function(time_limit_sec = 10, count_attemps = 5, eval_exec =
       },
       finally = {
         count_attemps = count_attemps - 1
-        # Делаем небольшую паузу:
-        Sys.sleep(1)
+        # Делаем небольшую паузу (случайную от 3 до 30 секунд):
+        Sys.sleep(sample(3:30, 1))
       }
     )
   }
