@@ -1,12 +1,12 @@
 #'dix
 #'
-#' @title dix_google_read_timeout
+#' @title dix_eval_timeout
 #'
-#' @description Reading a Google Sheet Taking into Account Timeout and Number of Attempts
+#' @description Executes the given function, limiting the timeout and the number of attempts
 #'
 #' @return string/dataframe
 #'
-#' @examples dix_google_read_timeout
+#' @examples dix_eval_timeout
 #'
 #' @export
 #'
@@ -18,7 +18,11 @@
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
-dix_google_read_timeout <- function(time_limit_sec = 10, count_attemps = 5, eval_exec = 'EMPTY') {
+dix_eval_timeout <- function(time_limit_sec = 10, count_attemps = 5, eval_exec = 'EMPTY') {
+  # time_limit_sec - количество секунд ждать выполнения, после этого отрубать
+  # count_attemps - количество попыток
+  # eval_exec - конструкция, которую нужно выполнить
+  # 
   dv_return <- 'FAIL'
   # count_attemps - Количество попыток, если что-то пошло не так
   # Задаем параметры с указанием лимитов:
