@@ -44,6 +44,10 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
       error = function(e) {
         dv_return <<- paste0('ERROR *** ', e)
         # Делаем небольшую паузу (случайную от 3 до 30 секунд):
+        setTimeLimit(cpu = 60, elapsed = 60, transient = TRUE)
+        on.exit({
+          setTimeLimit(cpu = Inf, elapsed = Inf, transient = FALSE)
+        })
         Sys.sleep(sample(3:30, 1))
       },
       finally = {
