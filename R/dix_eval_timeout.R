@@ -25,7 +25,7 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
   # 
   dv_return <- 'FAIL'
   # count_attemps - Количество попыток, если что-то пошло не так
-  dv_statcount_attemps <- count_attemps
+  dv_stat_count_attemps <- count_attemps
   # Задаем параметры с указанием лимитов:
   setTimeLimit(cpu = time_limit_sec, elapsed = time_limit_sec, transient = TRUE)
   on.exit({
@@ -37,10 +37,6 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
       expr = {
         # Здесь выполняем нужное:
         dv_return <- eval(parse(text=eval_exec))
-        # Отображаем с какой попытки посчиталось всё успешно? если не с первой:
-        if (dv_statcount_attemps != count_attemps) {
-          dix_log(paste0(script_name, ' - dix_eval_timeout', ' - Номер попытки, с которой посчиталось успешно = ', dv_statcount_attemps + 1 - count_attemps))
-        }
         # Если дошли до этого места, то всё норм и прерываем цикл:
         break
       },
@@ -53,6 +49,10 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
         Sys.sleep(sample(3:30, 1))
       }
     )
+  }
+  # Отображаем количество попыток выполнения eval (если не с первой):
+  if (dv_stat_count_attemps > count_attemps) {
+    dix_log(paste0(script_name, ' - Количество попыток dix_eval_timeout = ', dv_stat_count_attemps + 1 - count_attemps))
   }
   return(dv_return)
 }
