@@ -18,13 +18,14 @@
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
-dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec = 'EMPTY') {
+dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec = 'EMPTY', script_name = 'dix_eval_timeout') {
   # time_limit_sec - количество секунд ждать выполнения, после этого отрубать
   # count_attemps - количество попыток
   # eval_exec - конструкция, которую нужно выполнить
   # 
   dv_return <- 'FAIL'
   # count_attemps - Количество попыток, если что-то пошло не так
+  dv_statcount_attemps <- count_attemps
   # Задаем параметры с указанием лимитов:
   setTimeLimit(cpu = time_limit_sec, elapsed = time_limit_sec, transient = TRUE)
   on.exit({
@@ -36,12 +37,15 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
       expr = {
         # Здесь выполняем нужное:
         dv_return <- eval(parse(text=eval_exec))
+        # Отображаем с какой попытки посчиталось всё успешно? если не с первой:
+        if (dv_statcount_attemps != count_attemps) {
+          dix_log(paste0(script_name, ' - dix_eval_timeout', ' - Номер попытки, с которой посчиталось успешно = ', dv_statcount_attemps + 1 - count_attemps))
+        }
         # Если дошли до этого места, то всё норм и прерываем цикл:
         break
       },
       error = function(e) {
         dv_return <<- paste0('ERROR *** ', e)
-		dix_log(paste0('dix_eval_timeout', ' - ATTEMPS *** ', e))
       },
       finally = {
         count_attemps = count_attemps - 1
