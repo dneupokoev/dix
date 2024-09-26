@@ -41,6 +41,7 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
       },
       error = function(e) {
         dv_return <<- paste0('ERROR *** ', e)
+		dix_log(paste0('dix_eval_timeout', ' - ATTEMPS *** ', e))
       },
       finally = {
         count_attemps = count_attemps - 1
