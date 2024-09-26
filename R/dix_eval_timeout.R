@@ -31,7 +31,7 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
   on.exit({
     setTimeLimit(cpu = Inf, elapsed = Inf, transient = FALSE)
   })
-  while (count_attemps >= 0) {
+  while (count_attemps > 0) {
     # Тело скрипта:
     tryCatch(
       expr = {
@@ -44,8 +44,7 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
       error = function(e) {
         dv_return <<- paste0('ERROR *** ', e)
         # Делаем небольшую паузу (случайную от 3 до 30 секунд):
-        # Sys.sleep(sample(3:30, 1))
-        Sys.sleep(sample(1:3, 1))
+        Sys.sleep(sample(3:30, 1))
       },
       finally = {
         count_attemps = count_attemps - 1
@@ -53,7 +52,7 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
     )
   }
   # Отображаем количество попыток выполнения eval (если не с первой):
-  if (dv_stat_count_attemps > 0) {
+  if (dv_stat_count_attemps > 1) {
     dix_log(paste0(script_name, ' - Number of attempts dix_eval_timeout = ', dv_stat_count_attemps))
   }
   return(dv_return)
