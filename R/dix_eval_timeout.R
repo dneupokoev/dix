@@ -42,11 +42,12 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
       },
       error = function(e) {
         dv_return <<- paste0('ERROR *** ', e)
+		# Делаем небольшую паузу (случайную от 3 до 30 секунд):
+        # Sys.sleep(sample(3:30, 1))
+		Sys.sleep(sample(1:3, 1))
       },
       finally = {
         count_attemps = count_attemps - 1
-        # Делаем небольшую паузу (случайную от 3 до 30 секунд):
-        Sys.sleep(sample(3:30, 1))
       }
     )
   }
