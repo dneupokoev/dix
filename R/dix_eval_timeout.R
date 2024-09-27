@@ -20,11 +20,13 @@
 
 dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec = 'EMPTY', script_name = 'dix_eval_timeout') {
   # time_limit_sec - количество секунд ждать выполнения, после этого отрубать
-  # count_attemps - количество попыток
+  # count_attemps - количество попыток, если что-то пошло не так
   # eval_exec - конструкция, которую нужно выполнить
   # 
   dv_return <- 'FAIL'
-  # count_attemps - Количество попыток, если что-то пошло не так
+  # dv_pause_sec_max - Максимальное время для паузы в случае ошибки:
+  dv_pause_sec_max <- 120
+  # dv_stat_count_attemps - Номер попытки для отображения статистики:
   dv_stat_count_attemps <- 0
   while (count_attemps > 0) {
     # Тело скрипта:
@@ -44,13 +46,13 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
       error = function(e) {
         dv_return <<- paste0('ERROR *** ', e)
         # Задаем параметры с указанием лимитов:
-        setTimeLimit(cpu = 60, elapsed = 60, transient = TRUE)
+        setTimeLimit(cpu = dv_pause_sec_max+10, elapsed = dv_pause_sec_max+10, transient = TRUE)
         on.exit({
           setTimeLimit(cpu = Inf, elapsed = Inf, transient = FALSE)
         })
-        # Делаем небольшую паузу (случайную от 3 до 30 секунд):
-		dix_log(paste0(script_name, ' - dix_eval_timeout PAUSE: ', e))
-        Sys.sleep(sample(3:30, 1))
+        # Делаем небольшую паузу (случайную от 3 до dv_pause_sec_max секунд):
+        dix_log(paste0(script_name, ' - dix_eval_timeout PAUSE: ', e))
+        Sys.sleep(sample(3:dv_pause_sec_max, 1))
       },
       finally = {
         count_attemps = count_attemps - 1
