@@ -22,6 +22,8 @@ dix_eval_timeout <- function(time_limit_sec = 60, count_attemps = 10, eval_exec 
   # time_limit_sec - количество секунд ждать выполнения, после этого отрубать
   # count_attemps - количество попыток, если что-то пошло не так
   # eval_exec - конструкция, которую нужно выполнить
+  #
+  # devtools::install_github("dneupokoev/dix", upgrade = "never")
   # 
   dv_return <- 'FAIL'
   # dv_pause_sec_max - Максимальное время для паузы в случае ошибки:
