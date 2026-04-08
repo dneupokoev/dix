@@ -15,4 +15,5 @@
 <br>dix_log - 
 <br>dix_write_csv - 
 <br>dix_eval_timeout - 
+<br>dix_send_xmpp_message - 
 </p>
