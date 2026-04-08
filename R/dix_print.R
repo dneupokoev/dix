@@ -1,35 +1,34 @@
-#'dix
+#' Форматированный вывод с меткой времени
 #'
-#' @title dix_print
+#' Функция выводит сообщение в консоль с автоматическим добавлением
+#' текущей даты и времени. Поддерживает до трёх дополнительных параметров.
 #'
-#' @description text generation function from transmitted parameters
+#' @param print_in01 Основное сообщение для вывода. Если не указано, будет NA.
+#' @param print_in02 Дополнительный параметр (необязательный).
+#' @param print_in03 Ещё один дополнительный параметр (необязательный).
 #'
-#' @return string
+#' @return Невидимо возвращает строку с форматированным сообщением.
 #'
-#' @examples dix_print
+#' @examples
+#' dix_print("Простое сообщение")
+#' dix_print("Сообщение", "Дополнительно")
+#' dix_print("Сообщение", "Дополнительно", "Ещё")
 #'
 #' @export
-#'
-#'
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Build and Reload Package:  'Ctrl + Shift + B'
-#   Check Package:             'Ctrl + Shift + E'
-#   Test Package:              'Ctrl + Shift + T'
+dix_print <- function(print_in01 = NA, print_in02 = NA, print_in03 = NA) {
+  # Формируем базовую строку с меткой времени и основным сообщением
+  txt_f_print <- paste(as.character(Sys.time()), "|", as.character(print_in01))
 
-dix_print <- function(print_in01=NA, print_in02=NA, print_in03=NA){
-  txt_f_print <- paste( as.character(Sys.time()), "|", as.character(print_in01) )
-
+  # Добавляем второй параметр, если он указан
   if (!is.na(print_in02)) {
-    txt_f_print <- paste( txt_f_print, "|", as.character(print_in02) )
+    txt_f_print <- paste(txt_f_print, "|", as.character(print_in02))
   }
 
+  # Добавляем третий параметр, если он указан
   if (!is.na(print_in03)) {
-    txt_f_print <- paste( txt_f_print, "|", as.character(print_in03) )
+    txt_f_print <- paste(txt_f_print, "|", as.character(print_in03))
   }
 
-  print(txt_f_print, quote=FALSE)
+  # Выводим результат без кавычек
+  print(txt_f_print, quote = FALSE)
 }
-
-

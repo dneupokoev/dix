@@ -2,20 +2,27 @@
 % Please edit documentation in R/dix_print.R
 \name{dix_print}
 \alias{dix_print}
-\title{dix_print}
+\title{Форматированный вывод с меткой времени}
 \usage{
 dix_print(print_in01 = NA, print_in02 = NA, print_in03 = NA)
 }
+\arguments{
+\item{print_in01}{Основное сообщение для вывода. Если не указано, будет NA.}
+
+\item{print_in02}{Дополнительный параметр (необязательный).}
+
+\item{print_in03}{Ещё один дополнительный параметр (необязательный).}
+}
 \value{
-string
+Невидимо возвращает строку с форматированным сообщением.
 }
 \description{
-text generation function from transmitted parameters
-}
-\details{
-dix
+Функция выводит сообщение в консоль с автоматическим добавлением
+текущей даты и времени. Поддерживает до трёх дополнительных параметров.
 }
 \examples{
-dix_print
+dix_print("Простое сообщение")
+dix_print("Сообщение", "Дополнительно")
+dix_print("Сообщение", "Дополнительно", "Ещё")
 
 }

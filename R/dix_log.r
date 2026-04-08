@@ -1,38 +1,54 @@
-#'dix
+#' Расширенное логирование с меткой времени и уровнем важности
 #'
-#' @title dix_log
+#' Функция выводит лог-сообщение с автоматическим добавлением текущей даты и
+#' времени. Поддерживает стандартные уровни важности (begin, end, WARNING,
+#' ERROR, INFO). При указании произвольного второго параметра также выводит
+#' текущий размер памяти.
 #'
-#' @description text generation function from transmitted parameters
+#' @param print_in01 Основное сообщение для логирования. Если не указано, будет NA.
+#' @param print_in02 Уровень важности или дополнительная информация.
+#'   Поддерживаемые уровни: \code{begin}, \code{end}, \code{WARNING},
+#'   \code{ERROR}, \code{INFO}. Если указано другое значение, оно будет
+#'   выведено как дополнительный текст с размером памяти.
+#' @param print_in03 Дополнительная информация (необязательный).
 #'
-#' @return string
+#' @return Невидимо возвращает строку с форматированным лог-сообщением.
 #'
-#' @examples dix_log
+#' @details
+#' Функция автоматически определяет, является ли второй параметр стандартным
+#' уровнем важности. Если нет — выводит его как дополнительный текст и
+#' добавляет текущий размер потребляемой памяти.
+#'
+#' @examples
+#' dix_log("Начало обработки", "begin")
+#' dix_log("Ошибка подключения", "ERROR")
+#' dix_log("Обработка данных", "INFO", "файл: data.csv")
 #'
 #' @export
-#'
-#'
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Build and Reload Package:  'Ctrl + Shift + B'
-#   Check Package:             'Ctrl + Shift + E'
-#   Test Package:              'Ctrl + Shift + T'
+dix_log <- function(print_in01 = NA, print_in02 = NA, print_in03 = NA) {
+  # Формируем базовую строку с меткой времени и основным сообщением
+  txt_f_print <- paste0(as.character(Sys.time()), " | ", as.character(print_in01))
 
-dix_log <- function(print_in01=NA, print_in02=NA, print_in03=NA){
-  txt_f_print <- paste0(as.character(Sys.time()), ' | ', as.character(print_in01))
-  txt_f_memory <- paste0(' (', round(memory.size(), 0), ' MB)')
-  # 
+  # Получаем текущий размер памяти для отображения
+  txt_f_memory <- paste0(" (", round(memory.size(), 0), " MB)")
+
+  # Обрабатываем второй параметр
   if (!is.na(print_in02)) {
-    if (as.character(print_in02) %in% c('begin', 'end', 'WARNING', 'ERROR', 'INFO')) {
-      txt_f_print <- paste0(txt_f_print, ' | ', as.character(print_in02))
+    # Проверяем, является ли параметр стандартным уровнем важности
+    if (as.character(print_in02) %in% c("begin", "end", "WARNING", "ERROR", "INFO")) {
+      # Выводим только уровень важности
+      txt_f_print <- paste0(txt_f_print, " | ", as.character(print_in02))
     } else {
-      txt_f_print <- paste0(txt_f_print, ' | ', as.character(print_in02), txt_f_memory)
+      # Выводим как дополнительный текст с размером памяти
+      txt_f_print <- paste0(txt_f_print, " | ", as.character(print_in02), txt_f_memory)
     }
   }
-  # 
+
+  # Обрабатываем третий параметр
   if (!is.na(print_in03)) {
-    txt_f_print <- paste0(txt_f_print, ' | ', as.character(print_in03))
+    txt_f_print <- paste0(txt_f_print, " | ", as.character(print_in03))
   }
-  # 
+
+  # Выводим результат без кавычек
   print(txt_f_print, quote = FALSE)
 }

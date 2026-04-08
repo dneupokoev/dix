@@ -1,6 +1,58 @@
-dix.Rproj
-.gitattributes
-.Rbuildignore
-.RData
+# History files
 .Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+
+# Example code in package source
+ex/
+
+# Build log file
+00check.log
+00install.out
+00win.out
+
+# Build output
+*.tar.gz
+*.tgz
+*.zip
+*.win.binary
+dix_*.tar.gz
+
+# RStudio
+.Rproj.user/
+*.Rproj.user
+
+# devtools
+*.Rcheck/
+
+# Compiled files
+*.o
+*.so
+*.dll
+
+# Documentation
+dix.Rcheck/
+
+# Environment files
+.env
+.env.local
+
+# OS-specific files
 .DS_Store
+Thumbs.db
+
+# Output files
+*.out
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~

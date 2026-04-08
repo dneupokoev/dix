@@ -1,7 +1,24 @@
 Package: dix
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 1.3
-Author: di
-Maintainer: The package maintainer <yourself@somewhere.net>
-RoxygenNote: 6.1.1
+Title: Universal Helper Functions for R
+Version: 1.3.0
+Authors@R: 
+    person("Dmitry", "Neupokoev",
+           email = "dneupokoev@example.com",
+           role = c("aut", "cre"))
+Description: A collection of universal utility functions for everyday R
+    programming. Provides convenient wrappers for logging, printing, CSV
+    file generation, expression evaluation with timeout and retry logic,
+    and XMPP message sending via REST API.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Depends: R (>= 3.5.0)
+Imports:
+    methods,
+    utils
+Suggests:
+    devtools
+URL: https://github.com/dneupokoev/dix
+BugReports: https://github.com/dneupokoev/dix/issues
